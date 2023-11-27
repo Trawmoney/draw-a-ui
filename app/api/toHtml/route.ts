@@ -6,8 +6,8 @@ if you need to insert an image, use placehold.co to create a placeholder image. 
 export async function POST(request: Request) {
   const { image } = await request.json();
   const body: GPT4VCompletionRequest = {
-    model: "gpt-4-vision-preview",
-    max_tokens: 4096,
+    model: "Open-Orca/Mistral-7B-OpenOrca",
+    max_tokens: 500,
     messages: [
       {
         role: "system",
@@ -28,11 +28,11 @@ export async function POST(request: Request) {
 
   let json = null;
   try {
-    const resp = await fetch("https://api.openai.com/v1/chat/completions", {
+    const resp = await fetch("https://api.together.xyz/inference", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer f722a9f6e3afd6b9999e6aee02aeac9e751ea3a67b124c3667ab50c85c7fa99e`,
       },
       body: JSON.stringify(body),
     });
@@ -59,7 +59,7 @@ type MessageContent =
     )[];
 
 export type GPT4VCompletionRequest = {
-  model: "gpt-4-vision-preview";
+  model: "Open-Orca/Mistral-7B-OpenOrca";
   messages: {
     role: "system" | "user" | "assistant" | "function";
     content: MessageContent;
